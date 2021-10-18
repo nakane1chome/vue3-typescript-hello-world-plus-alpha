@@ -27,7 +27,9 @@
       "scripthost"
     ]
   },
+  "typeRoots": [ "./typings", "./node_modules/@types"],
   "include": [
+    "typings/**/index.d.ts",
     "src/**/*.ts",
     "src/**/*.tsx",
     "src/**/*.vue",

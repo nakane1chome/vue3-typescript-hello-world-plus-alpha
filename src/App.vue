@@ -1,18 +1,29 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
+  <h1>Hello World +alpha</h1>
+  <InputParam :params=loan_params msg="Input Parameters" />
+  <OutputTable :results=results() msg="Calculated Results" />
 </template>
 
 <script lang="ts">
-import { Options, Vue } from 'vue-class-component';
-import HelloWorld from './components/HelloWorld.vue';
+import { Vue } from 'vue-class-component';
 
-@Options({
-  components: {
-    HelloWorld,
-  },
-})
-export default class App extends Vue {}
+import {LoanCalc, LoanParams, LoanResults} from "./model/LoanCalc"
+
+export default class App extends Vue {
+     loan_calc!: LoanCalc;
+     loan_params!: LoanParams;
+     data(): Record<string, unknown>  {
+         var params = new LoanParams(500000, 25, 3.0);
+         var loan_calc = new LoanCalc(params);
+         return {
+             'loan_calc' : loan_calc,
+             'loan_params' : params,
+         }
+     }
+    results(): LoanResults {
+        return this.loan_calc.calc();
+    }
+}
 </script>
 
 <style>
